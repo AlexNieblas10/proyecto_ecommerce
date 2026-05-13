@@ -86,11 +86,9 @@
 </main>
 <jsp:include page="../fragments/footer.jsp"/>
 <script>
-const BASE = window.location.pathname.split('/').slice(0,2).join('/');
-
 async function loadProfile() {
-    const res = await fetch(`${BASE}/api/users/me`, { credentials: 'include' });
-    if (res.status === 401) { window.location.href = `${BASE}/login`; return; }
+    const res = await fetch(`\${BASE}/api/users/me`, { credentials: 'include' });
+    if (res.status === 401) { window.location.href = BASE + '/login'; return; }
     if (!res.ok) return;
     const u = await res.json();
     document.getElementById('pName').value    = u.name    || '';
@@ -103,7 +101,7 @@ async function loadProfile() {
 }
 
 async function loadOrders() {
-    const res = await fetch(`${BASE}/api/orders`, { credentials: 'include' });
+    const res = await fetch(`\${BASE}/api/orders`, { credentials: 'include' });
     const container = document.getElementById('ordersContainer');
     if (!res.ok) { container.innerHTML = '<p>Error al cargar pedidos.</p>'; return; }
     const orders = await res.json();
@@ -113,21 +111,21 @@ async function loadOrders() {
     }
     const badges = { pending: 'badge-pending', shipped: 'badge-shipped', delivered: 'badge-delivered' };
     const labels = { pending: 'Pendiente', shipped: 'Enviado', delivered: 'Entregado' };
-    container.innerHTML = `<table class="orders-table">
-        <thead><tr><th>Número</th><th>Fecha</th><th>Total</th><th>Estado</th></tr></thead>
-        <tbody>${orders.map(o => `<tr>
-            <td><strong>${o.orderNumber}</strong></td>
-            <td>${new Date(o.createdAt).toLocaleDateString('es-MX')}</td>
-            <td>$${Number(o.total).toFixed(2)}</td>
-            <td><span class="badge ${badges[o.status] || ''}">${labels[o.status] || o.status}</span></td>
-        </tr>`).join('')}</tbody>
-    </table>`;
+    const rows = orders.map(o =>
+        '<tr>' +
+        '<td><strong>' + o.orderNumber + '</strong></td>' +
+        '<td>' + new Date(o.createdAt).toLocaleDateString('es-MX') + '</td>' +
+        '<td>$' + Number(o.total).toFixed(2) + '</td>' +
+        '<td><span class="badge ' + (badges[o.status] || '') + '">' + (labels[o.status] || o.status) + '</span></td>' +
+        '</tr>'
+    ).join('');
+    container.innerHTML = '<table class="orders-table"><thead><tr><th>Número</th><th>Fecha</th><th>Total</th><th>Estado</th></tr></thead><tbody>' + rows + '</tbody></table>';
 }
 
 document.getElementById('profileForm').addEventListener('submit', async (e) => {
     e.preventDefault();
     const alertEl = document.getElementById('profileAlert');
-    const res = await fetch(`${BASE}/api/users/me`, {
+    const res = await fetch(`\${BASE}/api/users/me`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
@@ -159,7 +157,7 @@ document.getElementById('passwordForm').addEventListener('submit', async (e) => 
         alertEl.className = 'alert alert-error show';
         return;
     }
-    const res = await fetch(`${BASE}/api/users/me`, {
+    const res = await fetch(`\${BASE}/api/users/me`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',

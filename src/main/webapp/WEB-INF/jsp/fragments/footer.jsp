@@ -30,4 +30,6 @@
         &copy; 2026 FashionHub. Todos los derechos reservados.
     </div>
 </footer>
-<script src="${ctx}/js/auth.js"></script>
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+<script>document.addEventListener('DOMContentLoaded', function(){ if(window.lucide) lucide.createIcons(); });</script>
+<script src="${ctx}/js/auth.js?v=2"></script>

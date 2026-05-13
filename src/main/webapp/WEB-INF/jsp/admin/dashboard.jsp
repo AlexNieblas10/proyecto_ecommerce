@@ -17,10 +17,10 @@
     <aside class="admin-sidebar">
         <div class="admin-sidebar-title">Panel Admin</div>
         <nav class="admin-nav">
-            <a href="${ctx}/admin" class="active"><span class="nav-icon">📊</span> Dashboard</a>
-            <a href="${ctx}/admin/products"><span class="nav-icon">👗</span> Productos</a>
-            <a href="${ctx}/admin/users"><span class="nav-icon">👥</span> Usuarios</a>
-            <a href="${ctx}/tienda"><span class="nav-icon">🛍️</span> Ver tienda</a>
+            <a href="${ctx}/admin" class="active"><i data-lucide="bar-chart-2" class="nav-icon"></i> Dashboard</a>
+            <a href="${ctx}/admin/products"><i data-lucide="shirt" class="nav-icon"></i> Productos</a>
+            <a href="${ctx}/admin/users"><i data-lucide="users" class="nav-icon"></i> Usuarios</a>
+            <a href="${ctx}/tienda"><i data-lucide="store" class="nav-icon"></i> Ver tienda</a>
         </nav>
     </aside>
     <div class="admin-content">
@@ -47,12 +47,11 @@
 </div>
 <jsp:include page="../fragments/footer.jsp"/>
 <script>
-const BASE = window.location.pathname.split('/').slice(0,2).join('/');
 async function loadStats() {
     const [productsRes, usersRes, catsRes] = await Promise.all([
-        fetch(`${BASE}/api/products`, { credentials: 'include' }),
-        fetch(`${BASE}/api/admin/users`, { credentials: 'include' }),
-        fetch(`${BASE}/api/categories`, { credentials: 'include' })
+        fetch(`\${BASE}/api/products`, { credentials: 'include' }),
+        fetch(`\${BASE}/api/admin/users`, { credentials: 'include' }),
+        fetch(`\${BASE}/api/categories`, { credentials: 'include' })
     ]);
     if (productsRes.ok) document.getElementById('statProducts').textContent = (await productsRes.json()).length;
     if (usersRes.ok)    document.getElementById('statUsers').textContent    = (await usersRes.json()).length;

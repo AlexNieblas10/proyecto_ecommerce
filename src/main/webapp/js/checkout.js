@@ -1,5 +1,3 @@
-const BASE = window.location.pathname.split('/').slice(0,2).join('/');
-
 async function loadOrderSummary() {
     const summaryEl = document.getElementById('orderSummary');
     if (!summaryEl) return;

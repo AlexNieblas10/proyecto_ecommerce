@@ -13,7 +13,7 @@
         </nav>
         <div class="header-actions">
             <a href="${ctx}/carrito" class="cart-btn">
-                🛒 <span class="cart-badge" style="display:none">0</span>
+                <i data-lucide="shopping-cart"></i> <span class="cart-badge" style="display:none">0</span>
             </a>
             <c:choose>
                 <c:when test="${not empty loggedUserRole}">

@@ -1,5 +1,3 @@
-const BASE = window.location.pathname.split('/').slice(0,2).join('/');
-
 let allProducts = [];
 let debounceTimer;
 
@@ -35,6 +33,11 @@ async function loadProducts(filters = {}) {
     renderProducts(allProducts);
 }
 
+function imgError(el) {
+    el.outerHTML = '<div class="product-img-placeholder"><i data-lucide="shirt"></i></div>';
+    if (window.lucide) lucide.createIcons();
+}
+
 function renderProducts(products) {
     const grid = document.getElementById('productGrid');
     if (!grid) return;
@@ -46,8 +49,8 @@ function renderProducts(products) {
         <div class="product-card">
             <a href="${BASE}/tienda/producto?id=${p.id}">
                 ${p.imageUrl
-                    ? `<img src="${BASE}/${p.imageUrl}" alt="${p.name}" loading="lazy">`
-                    : `<div class="product-img-placeholder">👗</div>`}
+                    ? `<img src="${BASE}/${p.imageUrl}" alt="${p.name}" loading="lazy" onerror="imgError(this)">`
+                    : `<div class="product-img-placeholder"><i data-lucide="shirt"></i></div>`}
             </a>
             <div class="product-info">
                 <span class="product-category">${p.categoryName || ''}</span>
@@ -63,6 +66,7 @@ function renderProducts(products) {
             </div>
         </div>
     `).join('');
+    if (window.lucide) lucide.createIcons();
 }
 
 async function addToCart(productId) {

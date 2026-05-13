@@ -1,5 +1,3 @@
-const BASE = window.location.pathname.split('/').slice(0,2).join('/');
-
 async function loadCart() {
     const container = document.getElementById('cartContainer');
     if (!container) return;

@@ -50,3 +50,12 @@ a  { text-decoration: none; color: inherit; }
 ul { list-style: none; }
 button { cursor: pointer; border: none; background: none; font-family: var(--outfit); }
 input, select, textarea { font-family: var(--outfit); }
+
+[data-lucide] { width: 1em; height: 1em; stroke-width: 1.75; vertical-align: middle; }
+.nav-icon[data-lucide] { width: 1.1rem; height: 1.1rem; }
+.cart-btn [data-lucide] { width: 1.4rem; height: 1.4rem; }
+.category-icon [data-lucide] { width: 2rem; height: 2rem; }
+.product-img-placeholder [data-lucide] { width: 3rem; height: 3rem; opacity: 0.3; }
+.product-thumb-placeholder [data-lucide] { width: 2rem; height: 2rem; opacity: 0.3; }
+.success-icon [data-lucide] { width: 3.5rem; height: 3.5rem; color: var(--color-success); }
+.payment-option [data-lucide] { width: 1.1rem; height: 1.1rem; margin-right: .25rem; }

@@ -1,4 +1,4 @@
-const BASE = window.location.pathname.split('/').slice(0,2).join('/');
+var BASE = window.location.pathname.split('/').slice(0,2).join('/');
 
 async function loginUser(email, password) {
     const res = await fetch(`${BASE}/api/auth/login`, {

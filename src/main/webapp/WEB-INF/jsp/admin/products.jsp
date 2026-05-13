@@ -17,10 +17,10 @@
     <aside class="admin-sidebar">
         <div class="admin-sidebar-title">Panel Admin</div>
         <nav class="admin-nav">
-            <a href="${ctx}/admin"><span class="nav-icon">📊</span> Dashboard</a>
-            <a href="${ctx}/admin/products" class="active"><span class="nav-icon">👗</span> Productos</a>
-            <a href="${ctx}/admin/users"><span class="nav-icon">👥</span> Usuarios</a>
-            <a href="${ctx}/tienda"><span class="nav-icon">🛍️</span> Ver tienda</a>
+            <a href="${ctx}/admin"><i data-lucide="bar-chart-2" class="nav-icon"></i> Dashboard</a>
+            <a href="${ctx}/admin/products" class="active"><i data-lucide="shirt" class="nav-icon"></i> Productos</a>
+            <a href="${ctx}/admin/users"><i data-lucide="users" class="nav-icon"></i> Usuarios</a>
+            <a href="${ctx}/tienda"><i data-lucide="store" class="nav-icon"></i> Ver tienda</a>
         </nav>
     </aside>
     <div class="admin-content">
@@ -100,37 +100,39 @@
 
 <jsp:include page="../fragments/footer.jsp"/>
 <script>
-const BASE = window.location.pathname.split('/').slice(0,2).join('/');
+function thumbError(img) {
+    img.outerHTML = '<div class="product-thumb-placeholder"><i data-lucide="shirt"></i></div>';
+    if (window.lucide) lucide.createIcons();
+}
 
 async function loadProducts() {
-    const res = await fetch(`${BASE}/api/products`, { credentials: 'include' });
+    const res = await fetch(`\${BASE}/api/products`, { credentials: 'include' });
     if (!res.ok) return;
     const products = await res.json();
     const tbody = document.getElementById('productsTableBody');
     tbody.innerHTML = products.map(p => `
         <tr>
-            <td>${p.imageUrl
-                ? `<img src="${BASE}/${p.imageUrl}" class="product-thumb" alt="">`
-                : `<div class="product-thumb-placeholder">👗</div>`}</td>
-            <td>${p.name}</td>
-            <td>${p.categoryName || '—'}</td>
-            <td>$${Number(p.price).toFixed(2)}</td>
-            <td>${p.stock}</td>
-            <td class="${p.active ? 'status-active' : 'status-inactive'}">${p.active ? 'Activo' : 'Inactivo'}</td>
+            <td>\${p.imageUrl ? '<img src="'+BASE+'/'+p.imageUrl+'" class="product-thumb" alt="" onerror="thumbError(this)">' : '<div class="product-thumb-placeholder"><i data-lucide=\'shirt\'></i></div>'}</td>
+            <td>\${p.name}</td>
+            <td>\${p.categoryName || '—'}</td>
+            <td>$\${Number(p.price).toFixed(2)}</td>
+            <td>\${p.stock}</td>
+            <td class="\${p.active ? 'status-active' : 'status-inactive'}">\${p.active ? 'Activo' : 'Inactivo'}</td>
             <td class="actions">
-                <button class="btn btn-outline-dark btn-sm" onclick="editProduct(${JSON.stringify(p).replace(/"/g,'&quot;')})">Editar</button>
-                <button class="btn btn-danger btn-sm" onclick="deleteProduct(${p.id}, this)">${p.active ? 'Desactivar' : 'Activar'}</button>
+                <button class="btn btn-outline-dark btn-sm" onclick="editProduct(\${JSON.stringify(p).replace(/"/g,'&quot;')})">Editar</button>
+                <button class="btn btn-danger btn-sm" onclick="deleteProduct(\${p.id}, this)">\${p.active ? 'Desactivar' : 'Activar'}</button>
             </td>
         </tr>
     `).join('');
+    if (window.lucide) lucide.createIcons();
 }
 
 async function loadCategories() {
-    const res = await fetch(`${BASE}/api/categories`, { credentials: 'include' });
+    const res = await fetch(`\${BASE}/api/categories`, { credentials: 'include' });
     if (!res.ok) return;
     const cats = await res.json();
     const sel = document.getElementById('pCategory');
-    cats.forEach(c => sel.innerHTML += `<option value="${c.id}">${c.name}</option>`);
+    cats.forEach(c => sel.innerHTML += `<option value="\${c.id}">\${c.name}</option>`);
 }
 
 function openProductModal(p = null) {
@@ -155,7 +157,7 @@ function closeProductModal() {
 function editProduct(p) { openProductModal(p); }
 
 async function deleteProduct(id, btn) {
-    const res = await fetch(`${BASE}/api/products/${id}`, {
+    const res = await fetch(`\${BASE}/api/products/\${id}`, {
         method: 'DELETE', credentials: 'include'
     });
     if (res.ok) loadProducts();
@@ -174,7 +176,7 @@ document.getElementById('productForm').addEventListener('submit', async (e) => {
         categoryId:     parseInt(document.getElementById('pCategory').value),
         specifications: document.getElementById('pSpecs').value
     };
-    const url    = id ? `${BASE}/api/products/${id}` : `${BASE}/api/products`;
+    const url    = id ? `\${BASE}/api/products/\${id}` : `\${BASE}/api/products`;
     const method = id ? 'PUT' : 'POST';
     const res = await fetch(url, {
         method, credentials: 'include',

@@ -17,10 +17,10 @@
     <aside class="admin-sidebar">
         <div class="admin-sidebar-title">Panel Admin</div>
         <nav class="admin-nav">
-            <a href="${ctx}/admin"><span class="nav-icon">📊</span> Dashboard</a>
-            <a href="${ctx}/admin/products"><span class="nav-icon">👗</span> Productos</a>
-            <a href="${ctx}/admin/users" class="active"><span class="nav-icon">👥</span> Usuarios</a>
-            <a href="${ctx}/tienda"><span class="nav-icon">🛍️</span> Ver tienda</a>
+            <a href="${ctx}/admin"><i data-lucide="bar-chart-2" class="nav-icon"></i> Dashboard</a>
+            <a href="${ctx}/admin/products"><i data-lucide="shirt" class="nav-icon"></i> Productos</a>
+            <a href="${ctx}/admin/users" class="active"><i data-lucide="users" class="nav-icon"></i> Usuarios</a>
+            <a href="${ctx}/tienda"><i data-lucide="store" class="nav-icon"></i> Ver tienda</a>
         </nav>
     </aside>
     <div class="admin-content">
@@ -50,32 +50,31 @@
 </div>
 <jsp:include page="../fragments/footer.jsp"/>
 <script>
-const BASE = window.location.pathname.split('/').slice(0,2).join('/');
-
 async function loadUsers() {
-    const res = await fetch(`${BASE}/api/admin/users`, { credentials: 'include' });
+    const res = await fetch(`\${BASE}/api/admin/users`, { credentials: 'include' });
     if (!res.ok) return;
     const users = await res.json();
     document.getElementById('usersTableBody').innerHTML = users.map(u => `
-        <tr id="user-row-${u.id}">
-            <td>${u.id}</td>
-            <td>${u.name}</td>
-            <td>${u.email}</td>
-            <td>${u.phone || '—'}</td>
-            <td><span class="badge ${u.role === 'admin' ? 'badge-shipped' : 'badge-delivered'}">${u.role}</span></td>
-            <td class="${u.active ? 'status-active' : 'status-inactive'}">${u.active ? 'Activo' : 'Inactivo'}</td>
+        <tr id="user-row-\${u.id}">
+            <td>\${u.id}</td>
+            <td>\${u.name}</td>
+            <td>\${u.email}</td>
+            <td>\${u.phone || '—'}</td>
+            <td><span class="badge \${u.role === 'admin' ? 'badge-shipped' : 'badge-delivered'}">\${u.role}</span></td>
+            <td class="\${u.active ? 'status-active' : 'status-inactive'}">\${u.active ? 'Activo' : 'Inactivo'}</td>
             <td>
-                <button class="btn btn-sm ${u.active ? 'btn-danger' : 'btn-primary'}"
-                    onclick="toggleUser(${u.id}, ${u.active})">
-                    ${u.active ? 'Desactivar' : 'Activar'}
+                <button class="btn btn-sm \${u.active ? 'btn-danger' : 'btn-primary'}"
+                    onclick="toggleUser(\${u.id}, \${u.active})">
+                    \${u.active ? 'Desactivar' : 'Activar'}
                 </button>
             </td>
         </tr>
     `).join('');
+    if (window.lucide) lucide.createIcons();
 }
 
 async function toggleUser(id, currentActive) {
-    const res = await fetch(`${BASE}/api/admin/users/${id}/status`, {
+    const res = await fetch(`\${BASE}/api/admin/users/\${id}/status`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',

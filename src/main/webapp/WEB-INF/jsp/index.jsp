@@ -40,23 +40,23 @@
             <p class="section-subtitle">Encuentra lo que buscas</p>
             <div class="category-grid">
                 <a href="${ctx}/tienda?categoryId=1" class="category-card">
-                    <div class="category-icon">👕</div>
+                    <div class="category-icon"><i data-lucide="shirt"></i></div>
                     <div class="category-name">Camisetas</div>
                 </a>
                 <a href="${ctx}/tienda?categoryId=2" class="category-card">
-                    <div class="category-icon">👖</div>
+                    <div class="category-icon"><i data-lucide="tag"></i></div>
                     <div class="category-name">Pantalones</div>
                 </a>
                 <a href="${ctx}/tienda?categoryId=3" class="category-card">
-                    <div class="category-icon">👗</div>
+                    <div class="category-icon"><i data-lucide="sparkles"></i></div>
                     <div class="category-name">Vestidos</div>
                 </a>
                 <a href="${ctx}/tienda?categoryId=4" class="category-card">
-                    <div class="category-icon">👜</div>
+                    <div class="category-icon"><i data-lucide="gem"></i></div>
                     <div class="category-name">Accesorios</div>
                 </a>
                 <a href="${ctx}/tienda?categoryId=5" class="category-card">
-                    <div class="category-icon">👟</div>
+                    <div class="category-icon"><i data-lucide="footprints"></i></div>
                     <div class="category-name">Zapatos</div>
                 </a>
             </div>

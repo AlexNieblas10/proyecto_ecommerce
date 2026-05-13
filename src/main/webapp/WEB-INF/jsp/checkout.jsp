@@ -33,15 +33,15 @@
                             <div class="payment-options">
                                 <label class="payment-option">
                                     <input type="radio" name="paymentMethod" value="card" required>
-                                    <span>💳 Tarjeta de crédito/débito</span>
+                                    <span><i data-lucide="credit-card"></i> Tarjeta de crédito/débito</span>
                                 </label>
                                 <label class="payment-option">
                                     <input type="radio" name="paymentMethod" value="transfer">
-                                    <span>🏦 Transferencia bancaria</span>
+                                    <span><i data-lucide="landmark"></i> Transferencia bancaria</span>
                                 </label>
                                 <label class="payment-option">
                                     <input type="radio" name="paymentMethod" value="cash_on_delivery">
-                                    <span>💵 Pago contra entrega</span>
+                                    <span><i data-lucide="banknote"></i> Pago contra entrega</span>
                                 </label>
                             </div>
                         </div>
@@ -61,7 +61,7 @@
 <div class="modal-overlay" id="successModal">
     <div class="modal">
         <div class="order-success">
-            <div class="success-icon">✅</div>
+            <div class="success-icon"><i data-lucide="check-circle-2"></i></div>
             <h2>¡Pedido confirmado!</h2>
             <p>Tu número de pedido es:</p>
             <div class="order-number" id="confirmedOrderNumber"></div>
