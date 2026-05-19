@@ -20,6 +20,7 @@
             <a href="${ctx}/admin" class="active"><i data-lucide="bar-chart-2" class="nav-icon"></i> Dashboard</a>
             <a href="${ctx}/admin/products"><i data-lucide="shirt" class="nav-icon"></i> Productos</a>
             <a href="${ctx}/admin/users"><i data-lucide="users" class="nav-icon"></i> Usuarios</a>
+            <a href="${ctx}/admin/categories"><i data-lucide="tag" class="nav-icon"></i> Categorías</a>
             <a href="${ctx}/tienda"><i data-lucide="store" class="nav-icon"></i> Ver tienda</a>
         </nav>
     </aside>
@@ -42,6 +43,7 @@
         <div style="display:flex;gap:1rem;flex-wrap:wrap">
             <a href="${ctx}/admin/products" class="btn btn-primary">Gestionar productos</a>
             <a href="${ctx}/admin/users" class="btn btn-outline-dark">Gestionar usuarios</a>
+            <a href="${ctx}/admin/categories" class="btn btn-outline-dark">Gestionar categorías</a>
         </div>
     </div>
 </div>

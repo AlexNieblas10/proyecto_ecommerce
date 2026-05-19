@@ -20,6 +20,7 @@
             <a href="${ctx}/admin"><i data-lucide="bar-chart-2" class="nav-icon"></i> Dashboard</a>
             <a href="${ctx}/admin/products" class="active"><i data-lucide="shirt" class="nav-icon"></i> Productos</a>
             <a href="${ctx}/admin/users"><i data-lucide="users" class="nav-icon"></i> Usuarios</a>
+            <a href="${ctx}/admin/categories"><i data-lucide="tag" class="nav-icon"></i> Categorías</a>
             <a href="${ctx}/tienda"><i data-lucide="store" class="nav-icon"></i> Ver tienda</a>
         </nav>
     </aside>

@@ -29,8 +29,7 @@ public class JsonUtil {
 
     public static void sendJson(HttpServletResponse response, int status, Object data) throws IOException {
         response.setStatus(status);
-        response.setContentType("application/json");
-        response.setCharacterEncoding("UTF-8");
+        response.setContentType("application/json; charset=UTF-8");
         response.getWriter().write(GSON.toJson(data));
     }
 
