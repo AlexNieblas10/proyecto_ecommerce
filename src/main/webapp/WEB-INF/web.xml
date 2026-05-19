@@ -64,6 +64,27 @@
         <url-pattern>/admin/*</url-pattern>
     </filter-mapping>
 
+    <filter>
+        <filter-name>OptionalAuthFilter</filter-name>
+        <filter-class>org.ecommerce.filter.OptionalAuthFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>OptionalAuthFilter</filter-name>
+        <url-pattern>/api/products/*</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>OptionalAuthFilter</filter-name>
+        <url-pattern>/api/products</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>OptionalAuthFilter</filter-name>
+        <url-pattern>/api/categories/*</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>OptionalAuthFilter</filter-name>
+        <url-pattern>/api/categories</url-pattern>
+    </filter-mapping>
+
     <servlet-mapping>
         <servlet-name>default</servlet-name>
         <url-pattern>/css/*</url-pattern>

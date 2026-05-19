@@ -1,5 +1,23 @@
 var BASE = window.location.pathname.split('/').slice(0,2).join('/');
 
+async function syncGuestCart() {
+    const raw = localStorage.getItem('guestCart');
+    if (!raw) return;
+    const items = JSON.parse(raw);
+    if (!items.length) return;
+    for (const item of items) {
+        try {
+            await fetch(`${BASE}/api/cart`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                credentials: 'include',
+                body: JSON.stringify(item)
+            });
+        } catch (e) { console.error('syncGuestCart:', e); }
+    }
+    localStorage.removeItem('guestCart');
+}
+
 async function loginUser(email, password) {
     const res = await fetch(`${BASE}/api/auth/login`, {
         method: 'POST',
@@ -49,6 +67,7 @@ if (loginForm) {
 
         if (ok) {
             showAlert(alertEl, '¡Bienvenido! Redirigiendo...', 'success');
+            await syncGuestCart();
             setTimeout(() => {
                 window.location.href = data.role === 'admin'
                     ? `${BASE}/admin`

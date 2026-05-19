@@ -18,12 +18,13 @@ function renderCart(cart) {
     if (!cart.items || cart.items.length === 0) {
         container.innerHTML = `
             <div class="cart-empty">
-                <div class="empty-icon">🛒</div>
+                <div class="empty-icon"><i data-lucide="shopping-cart"></i></div>
                 <h3>Tu carrito está vacío</h3>
                 <p>Agrega productos desde la tienda.</p>
                 <a href="${BASE}/tienda" class="btn btn-primary" style="margin-top:1rem">Ir a la tienda</a>
             </div>`;
         if (summaryEl) summaryEl.innerHTML = '';
+        if (window.lucide) lucide.createIcons();
         return;
     }
 
@@ -45,7 +46,7 @@ function renderCart(cart) {
                             <div class="cart-product-info">
                                 ${item.imageUrl
                                     ? `<img src="${BASE}/${item.imageUrl}" alt="${item.productName}">`
-                                    : `<div style="width:64px;height:64px;background:var(--color-light);border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:1.5rem">👗</div>`}
+                                    : `<div class="product-thumb-placeholder"><i data-lucide="shirt"></i></div>`}
                                 <span>${item.productName}</span>
                             </div>
                         </td>

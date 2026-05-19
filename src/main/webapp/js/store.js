@@ -77,7 +77,12 @@ async function addToCart(productId) {
         body: JSON.stringify({ productId, quantity: 1 })
     });
     if (res.status === 401) {
-        window.location.href = `${BASE}/login`;
+        const guest = JSON.parse(localStorage.getItem('guestCart') || '[]');
+        const existing = guest.find(i => i.productId === productId);
+        if (existing) { existing.quantity += 1; } else { guest.push({ productId, quantity: 1 }); }
+        localStorage.setItem('guestCart', JSON.stringify(guest));
+        showToast('Inicia sesión para guardar tu carrito', 'error');
+        setTimeout(() => { window.location.href = `${BASE}/login`; }, 1200);
         return;
     }
     if (res.ok) {
