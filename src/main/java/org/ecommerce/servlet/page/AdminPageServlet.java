@@ -21,6 +21,8 @@ public class AdminPageServlet extends IndexServlet {
             jsp = "/WEB-INF/jsp/admin/categories.jsp";
         } else if (pathInfo.equals("/orders")) {
             jsp = "/WEB-INF/jsp/admin/orders.jsp";
+        } else if (pathInfo.equals("/orders")) {
+            jsp = "/WEB-INF/jsp/admin/orders.jsp";
         } else {
             jsp = "/WEB-INF/jsp/admin/dashboard.jsp";
         }

@@ -21,6 +21,7 @@
             <a href="${ctx}/admin/products"><i data-lucide="shirt" class="nav-icon"></i> Productos</a>
             <a href="${ctx}/admin/users"><i data-lucide="users" class="nav-icon"></i> Usuarios</a>
             <a href="${ctx}/admin/categories"><i data-lucide="tag" class="nav-icon"></i> Categorías</a>
+            <a href="${ctx}/admin/orders"><i data-lucide="package" class="nav-icon"></i> Pedidos</a>
             <a href="${ctx}/tienda"><i data-lucide="store" class="nav-icon"></i> Ver tienda</a>
         </nav>
     </aside>
@@ -39,26 +40,43 @@
                 <div class="stat-label">Categorías</div>
                 <div class="stat-value" id="statCategories">—</div>
             </div>
+            <div class="stat-card">
+                <div class="stat-label">Pedidos</div>
+                <div class="stat-value" id="statOrders">—</div>
+            </div>
         </div>
         <div style="display:flex;gap:1rem;flex-wrap:wrap">
             <a href="${ctx}/admin/products" class="btn btn-primary">Gestionar productos</a>
             <a href="${ctx}/admin/users" class="btn btn-outline-dark">Gestionar usuarios</a>
             <a href="${ctx}/admin/categories" class="btn btn-outline-dark">Gestionar categorías</a>
+            <a href="${ctx}/admin/orders" class="btn btn-outline-dark">Gestionar pedidos</a>
         </div>
     </div>
 </div>
 <jsp:include page="../fragments/footer.jsp"/>
+
 <script>
-async function loadStats() {
-    const [productsRes, usersRes, catsRes] = await Promise.all([
-        fetch(`\${BASE}/api/products`, { credentials: 'include' }),
-        fetch(`\${BASE}/api/admin/users`, { credentials: 'include' }),
-        fetch(`\${BASE}/api/categories`, { credentials: 'include' })
-    ]);
-    if (productsRes.ok) document.getElementById('statProducts').textContent = (await productsRes.json()).length;
-    if (usersRes.ok)    document.getElementById('statUsers').textContent    = (await usersRes.json()).length;
-    if (catsRes.ok)     document.getElementById('statCategories').textContent = (await catsRes.json()).length;
+async function loadSingleStat(url, elementId) {
+    try {
+        const res = await fetch(url, { credentials: 'include' });
+        if (res.ok) {
+            const data = await res.json();
+            document.getElementById(elementId).textContent = data.length;
+        } else {
+            document.getElementById(elementId).textContent = "Err";
+        }
+    } catch (e) {
+        document.getElementById(elementId).textContent = "!";
+    }
 }
+
+function loadStats() {
+    loadSingleStat('${ctx}/api/products', 'statProducts');
+    loadSingleStat('${ctx}/api/admin/users', 'statUsers');
+    loadSingleStat('${ctx}/api/categories', 'statCategories');
+    loadSingleStat('${ctx}/api/admin/orders', 'statOrders');
+}
+
 document.addEventListener('DOMContentLoaded', loadStats);
 </script>
 </body>

@@ -147,4 +147,19 @@ public class OrderRepository {
         o.setCreatedAt(rs.getTimestamp("created_at"));
         return o;
     }
+    
+    public List<Order> findAllForAdmin() throws SQLException {
+        List<Order> list = new ArrayList<>();
+        String sql = "SELECT * FROM orders ORDER BY created_at DESC";
+        
+        try (Connection con = DBConnection.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+            
+            while (rs.next()) {
+                list.add(mapOrder(rs));
+            }
+        }
+        return list;
+    }
 }
