@@ -2,8 +2,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/JavaScript.js to edit this template
  */
-const BASE = window.BASE_URL;
-
 async function loadProfile() {
     const res = await fetch(`${BASE}/api/users/me`, { credentials: 'include' });
     if (res.status === 401) { window.location.href = BASE + '/login'; return; }
