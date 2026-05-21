@@ -45,6 +45,22 @@
                                 </label>
                             </div>
                         </div>
+                        <div id="cardDetailsForm" style="display: none; margin-top: 15px; padding: 15px; background-color: #f9f9f9; border: 1px solid var(--color-light); border-radius: 8px;">
+                            <div class="form-group" style="margin-bottom: 10px;">
+                                <label for="cardNumber" style="display: block; margin-bottom: 5px; font-size: 0.9em; color: var(--color-dark);">Número de Tarjeta</label>
+                                <input type="text" id="cardNumber" class="form-control" placeholder="1234567890123456" maxlength="16" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+                            </div>
+                            <div style="display: flex; gap: 15px;">
+                                <div class="form-group" style="flex: 1;">
+                                    <label for="cardExpiry" style="display: block; margin-bottom: 5px; font-size: 0.9em; color: var(--color-dark);">Expiración</label>
+                                    <input type="text" id="cardExpiry" class="form-control" placeholder="MM/AA" maxlength="5">
+                                </div>
+                                <div class="form-group" style="flex: 1;">
+                                    <label for="cardCvv" style="display: block; margin-bottom: 5px; font-size: 0.9em; color: var(--color-dark);">CVV</label>
+                                    <input type="password" id="cardCvv" class="form-control" placeholder="123" maxlength="4" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+                                </div>
+                            </div>
+                        </div>
                         <button type="submit" class="btn btn-primary btn-full btn-lg" style="margin-top:1.5rem">
                             Confirmar Pedido
                         </button>
