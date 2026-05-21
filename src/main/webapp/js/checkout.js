@@ -48,6 +48,27 @@ async function submitOrder(e) {
         return;
     }
 
+    const payload = { shippingAddress, paymentMethod };
+
+    if (paymentMethod === 'card') {
+        payload.cardNumber = document.getElementById('cardNumber')?.value.trim();
+        payload.cardExpiry = document.getElementById('cardExpiry')?.value.trim();
+        payload.cardCvv = document.getElementById('cardCvv')?.value.trim();
+
+        if (!payload.cardNumber || payload.cardNumber.length < 16) {
+            showAlert(alertEl, 'Ingresa un número de tarjeta válido (16 dígitos)');
+            return;
+        }
+        if (!payload.cardExpiry) {
+            showAlert(alertEl, 'Ingresa la fecha de expiración');
+            return;
+        }
+        if (!payload.cardCvv || payload.cardCvv.length < 3) {
+            showAlert(alertEl, 'Ingresa un código CVV válido');
+            return;
+        }
+    }
+
     submitBtn.disabled = true;
     submitBtn.innerHTML = '<span class="spinner"></span> Procesando...';
 
@@ -55,7 +76,7 @@ async function submitOrder(e) {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
-        body: JSON.stringify({ shippingAddress, paymentMethod })
+        body: JSON.stringify(payload)
     });
 
     const data = await res.json();
@@ -85,7 +106,13 @@ document.querySelectorAll('.payment-option').forEach(opt => {
     opt.addEventListener('click', () => {
         document.querySelectorAll('.payment-option').forEach(o => o.classList.remove('selected'));
         opt.classList.add('selected');
-        opt.querySelector('input[type="radio"]').checked = true;
+        const radio = opt.querySelector('input[type="radio"]');
+        radio.checked = true;
+
+        const cardForm = document.getElementById('cardDetailsForm');
+        if (cardForm) {
+            cardForm.style.display = radio.value === 'card' ? 'block' : 'none';
+        }
     });
 });
 
