@@ -57,6 +57,22 @@ public class OrderServlet extends HttpServlet {
             return;
         }
 
+        // NUEVO: Validación de pago simulada (Requisito 5.2)
+        if ("card".equals(paymentMethod)) {
+            if (!json.has("cardNumber") || json.get("cardNumber").getAsString().trim().length() < 16) {
+                JsonUtil.sendError(res, 400, "Número de tarjeta inválido. Ingrese al menos 16 dígitos.");
+                return;
+            }
+            if (!json.has("cardExpiry") || json.get("cardExpiry").getAsString().trim().isEmpty()) {
+                JsonUtil.sendError(res, 400, "Fecha de expiración es requerida.");
+                return;
+            }
+            if (!json.has("cardCvv") || json.get("cardCvv").getAsString().trim().length() < 3) {
+                JsonUtil.sendError(res, 400, "Código CVV inválido.");
+                return;
+            }
+        }
+
         try {
             Cart cart = cartRepo.findOrCreateByUser(userId);
             if (cart.getItems().isEmpty()) {
