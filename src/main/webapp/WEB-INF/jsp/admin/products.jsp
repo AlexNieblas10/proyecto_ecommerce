@@ -107,7 +107,7 @@ function thumbError(img) {
 }
 
 async function loadProducts() {
-    const res = await fetch(`\${BASE}/api/products`, { credentials: 'include' });
+    const res = await fetch(`\${BASE}/api/products?admin=true`, { credentials: 'include' });
     if (!res.ok) return;
     const products = await res.json();
     const tbody = document.getElementById('productsTableBody');

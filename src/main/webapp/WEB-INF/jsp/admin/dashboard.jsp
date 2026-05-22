@@ -71,7 +71,7 @@ async function loadSingleStat(url, elementId) {
 }
 
 function loadStats() {
-    loadSingleStat('${ctx}/api/products', 'statProducts');
+    loadSingleStat('${ctx}/api/products?admin=true', 'statProducts');
     loadSingleStat('${ctx}/api/admin/users', 'statUsers');
     loadSingleStat('${ctx}/api/categories', 'statCategories');
     loadSingleStat('${ctx}/api/admin/orders', 'statOrders');

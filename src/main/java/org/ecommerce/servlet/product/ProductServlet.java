@@ -34,10 +34,11 @@ public class ProductServlet extends HttpServlet {
             BigDecimal maxPrice = maxPriceStr != null && !maxPriceStr.isEmpty()
                     ? new BigDecimal(maxPriceStr) : null;
 
-            String userRole = (String) req.getAttribute("userRole");
+            String userRole  = (String) req.getAttribute("userRole");
+            boolean adminView = "admin".equals(userRole) && "true".equals(req.getParameter("admin"));
             try {
                 List<Product> products;
-                if ("admin".equals(userRole)) {
+                if (adminView) {
                     products = productRepo.findAllForAdmin();
                 } else {
                     products = productRepo.findAll(name, categoryId, minPrice, maxPrice);

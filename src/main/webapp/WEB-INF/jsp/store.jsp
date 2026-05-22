@@ -38,7 +38,6 @@
                             <input type="number" id="maxPrice" placeholder="Max" min="0">
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary btn-full" style="margin-top:.5rem">Aplicar</button>
                     <button type="button" id="clearFilters" class="btn btn-outline-dark btn-full" style="margin-top:.5rem">Limpiar</button>
                 </form>
             </aside>
