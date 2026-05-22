@@ -36,9 +36,9 @@ async function loadAdminOrders() {
                 <td>$${Number(o.total).toFixed(2)}</td>
                 <td>
                     <select class="form-control" id="status-${o.id}" style="padding: 5px; width: 100%;">
-                        <option value="pending" ${isPending}>⏳ Pendiente</option>
-                        <option value="shipped" ${isShipped}>🚚 Enviado</option>
-                        <option value="delivered" ${isDelivered}>✅ Entregado</option>
+                        <option value="pending" ${isPending}>Pendiente</option>
+                        <option value="shipped" ${isShipped}>Enviado</option>
+                        <option value="delivered" ${isDelivered}>Entregado</option>
                     </select>
                 </td>
                 <td>
@@ -83,5 +83,4 @@ async function updateOrderStatus(orderId) {
     }
 }
 
-// Cargar la tabla en cuanto la página termine de renderizarse
 document.addEventListener('DOMContentLoaded', loadAdminOrders);
