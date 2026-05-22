@@ -5,6 +5,11 @@
          http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
 
+    <!-- ===== STARTUP LISTENER — initializes DB before any servlet ===== -->
+    <listener>
+        <listener-class>org.ecommerce.listener.AppContextListener</listener-class>
+    </listener>
+
     <display-name>FashionHub Ecommerce</display-name>
 
     <session-config>

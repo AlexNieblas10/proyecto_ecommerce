@@ -3,12 +3,9 @@ package org.ecommerce.util;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.security.Key;
 import java.util.Date;
-import java.util.Properties;
 
 public class JWTUtil {
 
@@ -16,16 +13,11 @@ public class JWTUtil {
     private static final long EXPIRATION_MS = 24L * 60 * 60 * 1000; // 24h
 
     static {
-        try (InputStream in = JWTUtil.class.getClassLoader().getResourceAsStream("db.properties")) {
-            Properties props = new Properties();
-            props.load(in);
-            String secret = props.getProperty("jwt.secret", "default-secret-key-change-me-please");
-            // Pad to at least 32 bytes for HMAC-SHA256
-            while (secret.getBytes(StandardCharsets.UTF_8).length < 32) secret += "x";
-            SECRET_KEY = Keys.hmacShaKeyFor(secret.getBytes(StandardCharsets.UTF_8));
-        } catch (IOException e) {
-            throw new RuntimeException("Cannot load JWT secret", e);
-        }
+        String secret = EnvConfig.get(EnvConfig.ENV_JWT_SECRET, "jwt.secret",
+                                      "fashionhub-super-secret-key-change-me-please");
+        // Pad to at least 32 bytes for HMAC-SHA256
+        while (secret.getBytes(StandardCharsets.UTF_8).length < 32) secret += "x";
+        SECRET_KEY = Keys.hmacShaKeyFor(secret.getBytes(StandardCharsets.UTF_8));
     }
 
     public static String generateToken(int userId, String email, String role) {

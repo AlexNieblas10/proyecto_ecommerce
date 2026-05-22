@@ -1,6 +1,6 @@
 -- FashionHub Ecommerce - Schema MySQL
--- Credenciales: root / alex
--- Ejecutar: mysql -u root -palex < schema.sql
+-- Do NOT run manually. This file is executed automatically on app startup.
+-- Configure credentials via environment variables or a .env file (see .env.example).
 
 CREATE DATABASE IF NOT EXISTS ecommerce_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE ecommerce_db;
