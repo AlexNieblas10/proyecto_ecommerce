@@ -146,10 +146,13 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    const filterForm = document.getElementById('filterForm');
-    if (filterForm) {
-        filterForm.addEventListener('submit', (e) => { e.preventDefault(); applyFilters(); });
-    }
+    ['minPrice', 'maxPrice'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.addEventListener('input', () => {
+            clearTimeout(debounceTimer);
+            debounceTimer = setTimeout(applyFilters, 400);
+        });
+    });
 
     const clearBtn = document.getElementById('clearFilters');
     if (clearBtn) {
