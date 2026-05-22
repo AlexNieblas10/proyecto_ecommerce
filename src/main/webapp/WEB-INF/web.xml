@@ -232,6 +232,10 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>AdminUserServlet</servlet-name>
+        <url-pattern>/api/admin/users</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminUserServlet</servlet-name>
         <url-pattern>/api/admin/users/*</url-pattern>
     </servlet-mapping>
 
